@@ -1,0 +1,13 @@
+data=iris
+d1=data[,1:4]
+library(caTools)
+S1=sample.split(d1,SplitRatio=.5)
+train=subset(d1,S1==TRUE)
+test=subset(d1,S1==FALSE)
+library(party)
+model3=randomForest(d1$Petal.Length~d1$Sepal.Length+d1$Sepal.Width,d1=train)
+#print(model2)
+#plot(model2)
+p3=predict(model3,test)
+table3=table(p3,test$Petal.Length)
+print(table3)                
